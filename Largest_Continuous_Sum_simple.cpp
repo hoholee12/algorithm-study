@@ -19,18 +19,22 @@ int main(){
 	
 	int check = 0;	
 	int imm = big;
-	int prev = big;
+	int loop = big;
+	int prevloop = loop << 1;
 	int flag = 1;
 	for (int i = 0; i < n; i++){
-		prev += hey.at(i);
-		if (imm < prev){
-			imm = prev;
+		loop += hey.at(i);
+		if (loop > prevloop){
 			check = i;
+			prevloop = loop;
+		}
+		if (imm < loop){
+			imm = loop;
 			flag = 1;
 		}
-		else if(flag == 1) { 
+		else if (flag == 1 || big > loop) {
 			flag = 0;
-			prev = big;
+			loop = big;
 		}
 	}
 
