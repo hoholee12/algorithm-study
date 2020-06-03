@@ -64,11 +64,15 @@ public:
 		sortUp(lim - 1);
 	}
 
-	void deleteElement(){
+	int deleteElement(){
+		if (lim == 0) return -1;	//00b
+
 		arr[0] = arr[lim - 1];
 		arr[lim - 1] = -1;
 		lim--;
 		sortDown(0);
+
+		return arr[0];
 	}
 
 	void printTree(){
@@ -95,10 +99,20 @@ public:
 int main(){
 	HeapArray heap;
 	
-	for (int i = 0; i < 10; i++)
-	heap.insertElement(rand() % 100);
+	for (int i = 0, j = 0; i < 10 && ((j = rand() % 100)|| true); i++){
+		std::cout << j << ' ';
+		heap.insertElement(j);
+	}
 
+	std::cout << std::endl;
 	heap.printTree();
+
+	for (int i = 0, j = 0; i < 10 && ((j = heap.deleteElement()) != -1); i++){
+		std::cout << j << ' ';
+	}
+
+
+
 
 	return 0;
 }
