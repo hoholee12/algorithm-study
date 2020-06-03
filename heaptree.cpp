@@ -93,12 +93,10 @@ public:
 */
 
 int main(){
-	int arr[10] = { 9, 7, 6, 5, 4, 3, 2, 2, 1, 3 };
-	HeapArray heap(arr, 10);
+	HeapArray heap;
 	
-	heap.insertElement(2);
-
-	heap.deleteElement();
+	for (int i = 0; i < 10; i++)
+	heap.insertElement(rand() % 100);
 
 	heap.printTree();
 
