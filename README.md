@@ -13,8 +13,6 @@ i will be uploading question based on specific algorithms, code, and then an exa
 
 4. SORTING ALGORITHMS
 
-5. NP-COMPLETE
+5. APPROXIMATION
 
-6. APPROXIMATION
-
-7. NP-COMPLETE SEARCH
+6. NP-SOLUTION
