@@ -28,7 +28,8 @@ void ScoopSort(int* arr, int size){
 		for (int i = 0; i < size; i++){
 			int val = arr[i] - min;
 			if (val < size && val >= 0){
-				subarr[val] = arr[i];
+				int x = 0; for (; subarr[val + x] > initval; x++);
+				subarr[val + x] = arr[i];
 			}
 		}
 
@@ -53,7 +54,7 @@ void ScoopSort(int* arr, int size){
 }
 
 int main(){
-	int arr[5] = { -101, 0, 3, 7, 6 };
+	int arr[5] = { 0, -101, -200, -200, 6 };
 
 	ScoopSort(arr, 5);
 
