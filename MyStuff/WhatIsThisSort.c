@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-void MemorySort(int* arr, int size){
+void WhatIsThisSort(int* arr, int size){
 	//O(N)
 	int min = arr[0];
 	int max = arr[0];
@@ -20,7 +20,10 @@ void MemorySort(int* arr, int size){
 
 	//O(N)
 	for (int i = 0; i < size; i++){
-		bigarr[arr[i] - min] = arr[i];
+		//shift duplicate ones
+		int j = 0;
+		for (; bigarr[arr[i] - min + j] != initval; j++);
+		bigarr[arr[i] - min + j] = arr[i];
 	}
 
 	//O(N)
@@ -34,9 +37,9 @@ void MemorySort(int* arr, int size){
 }
 
 int main(){
-	int arr[8] = { 50, 2, 13, 33, 62, -10, 999, 368 };
+	int arr[8] = { 50, 2, 13, 33, 33, -10, 999, 368 };
 
-	MemorySort(arr, 8);
+	WhatIsThisSort(arr, 8);
 
 	for (int i = 0; i < 8; i++) printf("%d ", arr[i]);
 
