@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-void WhatIsThisSort(int* arr, int size){
+void CountWithInsertionSort(int* arr, int size){
 	//O(N)
 	int min = arr[0];
 	int max = arr[0];
@@ -60,11 +60,11 @@ void WhatIsThisSort(int* arr, int size){
 }
 
 int main(){
-	int arr[10] = { 0, 1, 1, INT_MAX - 3, INT_MAX, 1, 2, 3, 4, 4 };
+	int arr[5] = { -101, 100, 3, 7, 6 };
 
-	WhatIsThisSort(arr, 10);
+	CountWithInsertionSort(arr, 5);
 
-	for (int i = 0; i < 10; i++) printf("%d ", arr[i]);
+	for (int i = 0; i < 5; i++) printf("%d ", arr[i]);
 
 	return 0;
 }
