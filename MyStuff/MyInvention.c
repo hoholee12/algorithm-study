@@ -2,8 +2,8 @@
 #include<stdlib.h>
 
 void IDontKnowWhatThisIs(int* arr, int size){
-	int* minuscount = (int*)malloc(size * sizeof(int));	//new location chooser array
-	int* valarr = (int*)malloc(size * sizeof(int));	//value backup array
+	int* minuscount = malloc(size * sizeof(int));	//new location chooser array
+	int* valarr = malloc(size * sizeof(int));	//value backup array
 
 	//compare all elements: size^2
 	for (int i = 0; i < size; i++){
@@ -25,6 +25,9 @@ void IDontKnowWhatThisIs(int* arr, int size){
 		arr[minuscount[i]] = valarr[i];
 	}
 
+
+	free(minuscount);
+	free(valarr);
 	//total time complexity: O(size^2)
 }
 
