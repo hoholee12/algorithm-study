@@ -11,23 +11,46 @@ void WhatIsThisSort(int* arr, int size){
 	}
 
 	//O(N)
-	int bigsize = max - min + 1;
 	int initval = min - 1;
-	int* bigarr = malloc(bigsize * sizeof(int));
-	for (int i = 0; i < bigsize; i++){
+	int* bigarr = malloc(size * sizeof(int));
+	for (int i = 0; i < size; i++){
 		bigarr[i] = initval;
 	}
 
 	//O(N)
 	for (int i = 0; i < size; i++){
-		//shift duplicate ones
-		int j = 0;
-		for (; bigarr[arr[i] - min + j] != initval; j++);
-		bigarr[arr[i] - min + j] = arr[i];
+		
+		if (arr[i] - min >= size){
+
+			//insertion sort O(N^2)
+			int temp = 0;
+			for (int j = size - 1; j >= 0; j--){
+				if (bigarr[j] < arr[i]){
+					//reverse
+					int x = j;
+					for (; bigarr[x] != initval; x--);
+					for (; x < j; x++){
+						bigarr[x] = bigarr[x + 1];
+					}
+					temp = x;
+					break;
+				}
+			}
+			//place
+			bigarr[temp] = arr[i];
+		
+		}
+		else{
+
+			//shift duplicate ones
+			int j = 0;
+			for (; bigarr[arr[i] - min + j] != initval; j++);
+			bigarr[arr[i] - min + j] = arr[i];
+		}
 	}
 
 	//O(N)
-	for (int i = 0, j = 0; i < bigsize; i++){
+	for (int i = 0, j = 0; i < size; i++){
 		if (bigarr[i] != initval) arr[j++] = bigarr[i];
 	}
 
@@ -37,11 +60,11 @@ void WhatIsThisSort(int* arr, int size){
 }
 
 int main(){
-	int arr[8] = { 50, 2, 13, 33, 33, -10, 999, 368 };
+	int arr[10] = { 0, 1, 1, INT_MAX - 3, INT_MAX, 1, 2, 3, 4, 4 };
 
-	WhatIsThisSort(arr, 8);
+	WhatIsThisSort(arr, 10);
 
-	for (int i = 0; i < 8; i++) printf("%d ", arr[i]);
+	for (int i = 0; i < 10; i++) printf("%d ", arr[i]);
 
 	return 0;
 }
