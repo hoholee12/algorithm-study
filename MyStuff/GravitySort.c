@@ -12,13 +12,11 @@ void GravitySort(int* arr, int size){
 	int maxBackup = max;
 	int minBackup = min;
 	//solution for zero or negative values
-	if (minBackup <= 0){
-		max -= minBackup - 1;
-		min -= minBackup - 1;
-		for (int i = 0; i < size; i++) arr[i] -= minBackup - 1;
-	}
+	max -= minBackup - 1;
+	min -= minBackup - 1;
+	for (int i = 0; i < size; i++) arr[i] -= minBackup - 1;
 
-	int* temparr = (int*)calloc(max - min + 1, sizeof(int));
+	int* temparr = calloc(max - min + 1, sizeof(int));
 
 	for (int j = max; j >= min; j--){
 		for (int i = 0; i < size; i++){
@@ -36,13 +34,14 @@ void GravitySort(int* arr, int size){
 	}
 	
 	//solution for zero or negative values
-	if (minBackup <= 0){
-		for (int i = 0; i < size; i++) arr[i] += minBackup - 1;
-	}
+	for (int i = 0; i < size; i++) arr[i] += minBackup - 1;
+
+	free(temparr);
+	
 }
 
 int main(){
-	int arr[10] = { 50, 2, 13, 33, 62, 11,  30, 66, 1, -101 };
+	int arr[10] = { 50, 2, 13, 33, 62, 11,  30, 66, 0, -101 };
 
 	GravitySort(arr, 10);
 
