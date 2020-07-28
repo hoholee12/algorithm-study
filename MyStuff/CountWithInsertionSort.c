@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+/*algorithm designed by hoholee12*/
+
 void CountWithInsertionSort(int* arr, int size){
 	//O(N)
 	int min = arr[0];

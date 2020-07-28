@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+/*algorithm designed by hoholee12*/
+
 void IDontKnowWhatThisIs(int* arr, int size){
 	int* minuscount = malloc(size * sizeof(int));	//new location chooser array
 	int* valarr = malloc(size * sizeof(int));	//value backup array

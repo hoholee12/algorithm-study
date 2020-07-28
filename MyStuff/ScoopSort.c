@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+/*algorithm designed by hoholee12*/
+
 int ScoopSort(int* arr, int size, int buf){
 
 	//subarr buffer size
