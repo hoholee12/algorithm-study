@@ -1,19 +1,33 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include"nonimportant.h"
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
 
-/*copied from QuickSort.c*/
-//lol merge sort
+//insertion sort
 int MedianChooser(int* arr, int left, int middle, int right){
-	int temparr[3] = { arr[left], arr[middle], arr[right] };
-	MergeDivide(temparr, 0, 2);
-	if (temparr[1] == arr[left]) return left;
-	else if (temparr[1] == arr[middle]) return middle;
-	else return right;
+	
+	int temparr[3] = { left, middle, right };
+	for (int i = 1; i < 3; i++){
+		int temp = temparr[i];
+		int j = i - 1;
+		for (; j >= 0; j--){
+			int x = temparr[j];
+			if (arr[temp] < arr[x]){
+				temparr[j + 1] = temparr[j];
+			}
+			else{
+				break;
+			}
+		}
+		temparr[j + 1] = temp;
+	}
+
+	return temparr[1];
 }
-/*copied from QuickSort.c*/
+
 void swap(int* x, int* y){ int temp = *x; *x = *y; *y = temp; }
-/*copied from QuickSort.c*/
+
 //pivot generator and sorter
 int Conquer(int* arr, int left, int right){
 	int dropped_size = right - left;
@@ -31,12 +45,12 @@ int Conquer(int* arr, int left, int right){
 	left_i += 1;
 
 	//swap numbers bigger than pivot to the right, smaller to the left
-	while (left_i < right + 1 && right_i > left){	//we need to count upto 'right'
+	while(left_i < right + 1 && right_i > left){	//we need to count upto 'right'
 
-		while (arr[left_i] < arr[pivot]) left_i++;	//position left_i to next number bigger than pivot
-		while (arr[right_i] > arr[pivot]) right_i--;	//position right_i to next number smaller than pivot
-
-		//swap pivot and break just after left and right interweave
+		while (arr[left_i] <= arr[pivot] && left_i <= right_i) left_i++;	//position left_i to next number bigger than pivot AND check interchange(end of the array)
+		while (arr[right_i] >= arr[pivot] && left_i <= right_i) right_i--;	//position right_i to next number smaller than pivot AND check interchange
+		
+		//swap pivot and break just after left and right interchange
 		if (left_i > right_i){
 			swap(&arr[pivot], &arr[right_i]);
 			pivot = right_i;
@@ -45,10 +59,11 @@ int Conquer(int* arr, int left, int right){
 		//else swap left and right
 		else swap(&arr[left_i], &arr[right_i]);
 	}
-
+	
 	return pivot;
 
 }
+
 
 /*ksmallest: kth smallest number*/
 int Divide(int* arr, int left, int right, int ksmallest){
