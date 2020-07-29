@@ -32,6 +32,7 @@ int ScoopSort(int* arr, int size, int buf){
 		int initval = min - 1;
 
 		//follow index: shift elements
+		int z = 0;
 		for (int i = 0; i < size; i++){
 			int val = arr[i] - min;
 			if (val < buf && val >= 0){
@@ -39,11 +40,12 @@ int ScoopSort(int* arr, int size, int buf){
 				int y = 0; for (; subarr[val + x + y] > initval; y++);
 				for (int j = y - 1; j >= 0; j--) subarr[val + x + j + 1] = subarr[val + x + j];
 				subarr[val + x] = arr[i];
+				if (val + x >= buf) z = x + 1;
 			}
 		}
 
 		//scoop subarr to bigarr: O(N)
-		for (int i = 0; i < buf * 2; i++){
+		for (int i = 0; i < buf + z; i++){
 			if (subarr[i] > initval){
 				bigarr[j++] = subarr[i];
 				if (lastsize < subarr[i]) lastsize = subarr[i];
