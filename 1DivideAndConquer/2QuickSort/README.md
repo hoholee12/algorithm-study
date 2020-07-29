@@ -5,7 +5,7 @@ as long as it leads to divided subproblems size less than 3/4.
 
 in comparison, merge sort always does n times comparison in conquer.
 ### 2. cache misses
-in MergeSort, it divides subproblems and conquers up to a single solution. comparison happens from left to right and then the next subproblems.
+in MergeSort, it divides subproblems and conquers up to a single solution. comparison happens from left to right and then proceeds to the next subproblems with different memory area, before going up one layer for bigger subproblems.
 
 that means its always looking at different areas of the memory. nono not good very bad situation for caching.
 
