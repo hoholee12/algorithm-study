@@ -1,14 +1,27 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include"nonimportant.h"
+#include<time.h>
 
-//lol merge sort
+//insertion sort
 int MedianChooser(int* arr, int left, int middle, int right){
-	int temparr[3] = { arr[left], arr[middle], arr[right] };
-	MergeDivide(temparr, 0, 2);
-	if (temparr[1] == arr[left]) return left;
-	else if (temparr[1] == arr[middle]) return middle;
-	else return right;
+	
+	int temparr[3] = { left, middle, right };
+	for (int i = 1; i < 3; i++){
+		int temp = temparr[i];
+		int j = i - 1;
+		for (; j >= 0; j--){
+			int x = temparr[j];
+			if (arr[temp] < arr[x]){
+				temparr[j + 1] = temparr[j];
+			}
+			else{
+				break;
+			}
+		}
+		temparr[j + 1] = temp;
+	}
+
+	return temparr[1];
 }
 
 void swap(int* x, int* y){ int temp = *x; *x = *y; *y = temp; }
@@ -64,12 +77,20 @@ void Divide(int* arr, int left, int right){
 }
 
 int main(){ 
+#define ARRSIZE 1000
+	int* arr = malloc(ARRSIZE * sizeof(int));
+	srand(time(NULL));
 
-	int arr[10] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
-	Divide(arr, 0, 9);
+	for (int i = 0; i < ARRSIZE; i++){
+		arr[i] = rand();
 
-	//print
-	for (int i = 0; i < 10; i++) printf("%d ", arr[i]);
+	}
 
+	time_t start = time(NULL);
+	Divide(arr, 0, ARRSIZE - 1);
+	time_t end = time(NULL);
+
+	for (int i = 0; i < ARRSIZE; i++) printf("%d ", arr[i]);
+	printf("\ntook %d second(s).", end - start);
 	return 0;
 }
