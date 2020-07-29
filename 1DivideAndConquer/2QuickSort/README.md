@@ -1,9 +1,7 @@
 # QuickSort is faster than MergeSort
 ## why?
-### 1. proper pivot placement can lead to less than n times per conquer.
-as long as it leads to divided subproblems size less than 3/4.
-
-in comparison, merge sort always does n times comparison in conquer.
+### 1. it does not copy the whole array to sort and put it back.
+nono, QuickSort on the otherhand swaps each element until satisfied.
 ### 2. cache misses
 in MergeSort, it divides subproblems and conquers up to a single solution. comparison happens from left to right and then proceeds to the next subproblems with different memory area, before going up one layer for bigger subproblems.
 
