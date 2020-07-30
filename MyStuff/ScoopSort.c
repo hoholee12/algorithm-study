@@ -4,15 +4,23 @@
 
 /*algorithm designed by hoholee12*/
 
+typedef struct{
+	int val;
+	int dup;
+} duplicates;
+
 int ScoopSort(int* arr, int size, int buf){
 
 	//subarr buffer size
 	buf += size;
 
 	int* bigarr = malloc(size * sizeof(int));
-	int* subarr = malloc(buf * 2 * sizeof(int));	//x2 yield for element shift
+	duplicates* subarr = malloc(buf * sizeof(duplicates));	//x2 yield for element shift
 	//subarr init: O(N)
-	for (int i = 0; i < size; i++) subarr[i] = INT_MIN;
+	for (int i = 0; i < buf; i++) {
+		subarr[i].val = INT_MIN;
+		subarr[i].dup = 0;
+	}
 
 	//will always have biggest number of section
 	int lastsize = INT_MIN;
@@ -31,24 +39,21 @@ int ScoopSort(int* arr, int size, int buf){
 		//initval per iteration
 		int initval = min - 1;
 
-		//follow index: shift elements
-		int z = 0;
+		//follow index: incr dup
 		for (int i = 0; i < size; i++){
 			int val = arr[i] - min;
 			if (val < buf && val >= 0){
-				int x = 0; for (; subarr[val + x] <= arr[i] && subarr[val + x] > initval; x++);
-				int y = 0; for (; subarr[val + x + y] > initval; y++);
-				for (int j = y - 1; j >= 0; j--) subarr[val + x + j + 1] = subarr[val + x + j];
-				subarr[val + x] = arr[i];
-				if (val + x >= buf) z = x + 1;
+				subarr[val].val = arr[i];
+				subarr[val].dup++;
 			}
 		}
 
 		//scoop subarr to bigarr: O(N)
-		for (int i = 0; i < buf + z; i++){
-			if (subarr[i] > initval){
-				bigarr[j++] = subarr[i];
-				if (lastsize < subarr[i]) lastsize = subarr[i];
+		for (int i = 0; i < buf; i++){
+			if (subarr[i].val > initval){
+				for (int x = 0; x < subarr[i].dup; x++) bigarr[j++] = subarr[i].val;
+				subarr[i].dup = 0;
+				if (lastsize < subarr[i].val) lastsize = subarr[i].val;
 			}
 		}
 
@@ -70,7 +75,7 @@ int ScoopSort(int* arr, int size, int buf){
 }
 
 int test2(){
-#define ARRSIZE 100000
+#define ARRSIZE 1000000
 	int* arr = malloc(ARRSIZE * sizeof(int));
 	srand(time(NULL));
 
@@ -102,15 +107,15 @@ int test1(){
 	srand(time(NULL));
 
 	printf("before: ");
-	for (int i = 0; i < ARRSIZE; i++) printf("%d ", arr[i]);
+	for (int i = 0; i < 10; i++) printf("%d ", arr[i]);
 	printf("\n");
 
 	time_t start = time(NULL);
-	int result = ScoopSort(arr, ARRSIZE, 0);
+	int result = ScoopSort(arr, 10, 0);
 	time_t end = time(NULL);
 
 	printf("after: ");
-	for (int i = 0; i < ARRSIZE; i++) printf("%d ", arr[i]);
+	for (int i = 0; i < 10; i++) printf("%d ", arr[i]);
 
 	printf("\nlooped %d time(s).\ntook %d second(s).", result, end - start);
 
