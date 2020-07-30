@@ -75,12 +75,12 @@ int ScoopSort(int* arr, int size, int buf){
 }
 
 int test2(){
-#define ARRSIZE 1000000
+#define ARRSIZE 10000000
 	int* arr = malloc(ARRSIZE * sizeof(int));
 	srand(time(NULL));
 
 	for (int i = 0; i < ARRSIZE; i++){
-		arr[i] = rand() % ARRSIZE;
+		arr[i] = rand()  *(RAND_MAX + 1) + rand();
 	
 	}
 
@@ -93,7 +93,7 @@ int test2(){
 	time_t end = time(NULL);
 
 	//printf("after: ");
-	for (int i = 0; i < ARRSIZE; i++) printf("%d ", arr[i]);
+	//for (int i = 0; i < ARRSIZE; i++) printf("%d ", arr[i]);
 
 	printf("\nlooped %d time(s).\ntook %d second(s).", result, end - start);
 

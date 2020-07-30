@@ -82,7 +82,7 @@ int test2(){
 	srand(time(NULL));
 
 	for (int i = 0; i < ARRSIZE; i++){
-		arr[i] = rand() % ARRSIZE;
+		arr[i] = rand()  *(RAND_MAX + 1) + rand();
 
 	}
 
