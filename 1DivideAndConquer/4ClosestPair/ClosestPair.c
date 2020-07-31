@@ -49,8 +49,10 @@ pair ClosestPair(vecarr S){
 	pair temp2 = { S.arr[S.xleft + 1], S.arr[S.xright] };
 	pair temp3 = { S.arr[S.xleft], S.arr[S.xright - 1] };
 	pair temparr[3] = { temp, temp2, temp3 };
+	int Ssize = S.xright - S.xleft + 1;
+
 	//return 2 or 3 pairs
-	switch (S.xright - S.xleft + 1){
+	switch (Ssize){
 	case 3:
 		return nearestPairChooser(temparr, 3);
 	case 2:
@@ -74,9 +76,10 @@ pair ClosestPair(vecarr S){
 	if (scleft < S.xleft) scleft = S.xleft;
 	if (scright > S.xright) scright = S.xright;
 	vecarr SC = { S.arr, scleft, scright };
+	int SCsize = SC.xright - SC.xleft + 1;
 	Divide(SC.arr, SC.xleft, SC.xright, yside);
-	double dmin = 0;
-	pair* tarr = malloc((SC.xright - SC.xleft + 1 + 2) * sizeof(pair));
+
+	pair* tarr = malloc((SCsize + 2) * sizeof(pair));
 
 	int x = 0;
 	for (int i = SC.xleft; i <= SC.xright; i++){
@@ -94,7 +97,7 @@ pair ClosestPair(vecarr S){
 	//throw in CPL CPR there as well without additional code
 	tarr[x++] = CPL;
 	tarr[x++] = CPR;
-	pair result = nearestPairChooser(tarr, (SC.xright - SC.xleft + 1 + 2));
+	pair result = nearestPairChooser(tarr, x);
 	free(tarr);
 	return result;
 }
