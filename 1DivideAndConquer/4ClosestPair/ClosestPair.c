@@ -77,34 +77,41 @@ pair ClosestPair(vecarr S){
 	if (scright > S.xright) scright = S.xright;
 	vecarr SC = { S.arr, scleft, scright };
 	int SCsize = SC.xright - SC.xleft + 1;
+	//sort to y side first for faster filter
 	Divide(SC.arr, SC.xleft, SC.xright, yside);
 
-	pair* tarr = malloc((SCsize + 2) * sizeof(pair));
-
-	int x = 0;
+	int dmin = INT_MAX;
+	pair CPC;
+	//avoid one sided pairs(these pairs are already covered by SL SR recursion) by filtering with half
+	//compares at most 6 times
 	for (int i = SC.xleft; i <= SC.xright; i++){
 		if (SC.arr[i].x <= half){
 			for (int j = SC.xleft; j <= SC.xright; j++){
 				if (SC.arr[j].x > half){
+
+					//get nearest pair here: CPC
 					pair tval = { SC.arr[i], SC.arr[j] };
-					tarr[x++] = tval;
+					int tmin = (int)dist(tval);
+					if (dmin > tmin){
+						dmin = tmin;
+						CPC = tval;
+					}
 				}
 			}
 		}
 	}
 	
-
-	//throw in CPL CPR there as well without additional code
-	tarr[x++] = CPL;
-	tarr[x++] = CPR;
-	pair result = nearestPairChooser(tarr, x);
-	free(tarr);
-	return result;
+	//compare CPL, CPR, CPC
+	pair* tarr = malloc(3 * sizeof(pair));
+	tarr[0] = CPL;
+	tarr[1] = CPR;
+	tarr[2] = CPC;
+	return nearestPairChooser(tarr, 3);
 }
 
 
 int main(){
-	vector temp[5] = { { 1, 5 }, { 2, 5 }, { 3, 2 }, { 5, 4 }, {10, 1} };
+	vector temp[5] = { { 3, 2 }, { 5, 4 }, { 10, 1 }, { 1, 5 }, { 2, 5 } };
 	vecarr S = { temp, 0, 4 };
 
 	//sort x side first
