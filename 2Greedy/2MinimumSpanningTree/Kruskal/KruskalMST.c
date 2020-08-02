@@ -4,34 +4,6 @@
 #include"KruskalMST.h"
 
 
-vertex popFirst(tree* mst){
-	if (mst->size == 0){
-		vertex temp = {0, 0};
-		return temp;
-	}
-
-	vertex temp = mst->arr[0];
-	for (int i = 0; i < mst->size - 1; i++){
-		mst->arr[i] = mst->arr[i + 1];
-	}
-	mst->size -= 1;
-	return temp;
-}
-
-void pushFirst(tree* mst, vertex a){
-
-	//realloc
-	vertex* newarr = malloc((mst->size + 1) * sizeof(vertex));
-	newarr[0] = a;
-	for (int i = 0; i < mst->size; i++){
-		newarr[i + 1] = mst->arr[i];
-	}
-	free(mst->arr);
-
-	mst->arr = newarr;
-	mst->size += 1;
-}
-
 //bool recursion
 int find(int* set, int size, int target, int temptarget){
 	if (set[temptarget] == target) return 1;	//found temptarget as union.
