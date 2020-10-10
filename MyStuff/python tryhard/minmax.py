@@ -11,4 +11,5 @@ for i in range(T):
             min = arr[j]
         if arr[j] > max:
             max = arr[j]
+    arr = []
     print("#" + str(i + 1) + " " + str(max - min))
