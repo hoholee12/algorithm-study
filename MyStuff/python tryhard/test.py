@@ -590,11 +590,11 @@ def fibonacci(nums):
         print(x, y)
         yield x
 
-def square(nums):
+def square_test(nums):
     for i in nums:
-        yield i**2;
+        yield i**2
 
-print(sum(square(fibonacci(10))))
+print(sum(square_test(fibonacci(10))))
 
 
 #operator overloading
