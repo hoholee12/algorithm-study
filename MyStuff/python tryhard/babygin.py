@@ -1,32 +1,16 @@
+import makelist
 
-try:
-    f = open("input.txt", "rt")
-except:
-    exit()
+mylist = makelist.mylist
+initcount = makelist.initcount
+
 
 #babygin -greedy
-
 is_babygin = 0
 
 # status
 status = [0, 0] #triplet, run
 triplet = 0
 run = 0
-
-#get data into list
-mylist = []
-for i in f.read(6):
-    mylist += [int(i)]
-print("original list:", mylist)
-
-def initcount():
-    count = []
-    for i in range(10):     #0~9 map
-        count += [0]
-
-    for i in mylist:
-        count[i] += 1
-    return count
 
 def checkrun(count, status):
     keeprunning = True
@@ -55,7 +39,7 @@ def checktriplet(count, status):
 
 #main check
 for mode in range(2):
-    count = initcount()
+    count = initcount(mylist)
     print(count)
     if mode == 0:
         checkrun(count, status)
@@ -74,7 +58,7 @@ for mode in range(2):
         is_babygin += 1
     elif run > 1 or triplet > 1:
         is_babygin += 1
-        
+
     status = [0, 0]
 
 
