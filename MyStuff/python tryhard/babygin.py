@@ -74,11 +74,7 @@ for mode in range(2):
         is_babygin += 1
     elif run > 1 or triplet > 1:
         is_babygin += 1
-
-    if run > 0:
-        print("run exists:", run)
-    if triplet > 0:
-        print("triplet exists:", triplet)
+        
     status = [0, 0]
 
 
