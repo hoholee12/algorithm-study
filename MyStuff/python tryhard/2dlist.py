@@ -1,3 +1,4 @@
+'''
 X, Y = map(int, input().split())
 list2d = [[0 for i in range(X)] for j in range(Y)]
 print(list2d)
@@ -8,10 +9,9 @@ newlist = [list(filter(lambda slist: True if slist == 2 else False, xlist)) for 
 print(mylist)
 print(newlist)
 
-
 for j in range(len(mylist)):
     print(mylist[j])
-
+'''
 #delta search (search neighbors, becareful with index)
 arr = [[i for i in range(3)] for j in range(3)]
 dx = [0, 0, -1 , 1]
@@ -35,3 +35,30 @@ print(alpha_index)
 
 arr_index = list(zip(*arr))     #dereference, passing varargs, useful for making transposed matrix
 print(arr_index)
+
+#partial set
+bit = [0 for i in range(4)]
+for i in range(2):
+    bit[0] = i
+    for j in range(2):
+        bit[1] = j
+        for k in range(2):
+            bit[2] = k
+            for l in range(2):
+                bit[3] = l
+                print(bit)
+
+#partial set 2
+arr = [3, 6, 7, 1, 5, 4]
+n = len(arr)
+for i in range(1<<n):
+    print("i:", bin(i))
+    for j in range(n):
+        print("\tj:", bin(j))
+        if i & (1<<j):
+            print("\t\ti & 1<<j:", bin(i & (1<<j)))
+            #print(i, 1<<j, end = ", ")
+            #print(arr[j], end=",")
+    print()
+
+#search
