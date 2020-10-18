@@ -52,13 +52,13 @@ for i in range(2):
 arr = [3, 6, 7, 1, 5, 4]
 n = len(arr)
 for i in range(1<<n):
-    print("i:", bin(i))
+    #print("i:", bin(i))
     for j in range(n):
-        print("\tj:", bin(j))
+        #print("\tj:", bin(j))
         if i & (1<<j):
-            print("\t\ti & 1<<j:", bin(i & (1<<j)))
+            #print("\t\ti & 1<<j:", bin(i & (1<<j)))
             #print(i, 1<<j, end = ", ")
-            #print(arr[j], end=",")
+            print(arr[j], end=",")
     print()
 
 #search
